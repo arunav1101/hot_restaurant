@@ -37,7 +37,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/add", function (req, res) {
-  res.sendFile(path.join(__dirname, "resevered.html"));
+  res.sendFile(path.join(__dirname, "add.html"));
 });
 
 app.get("/view", function (req, res) {
