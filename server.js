@@ -15,11 +15,18 @@ app.use(express.urlencoded({
 app.use(express.json());
 
 var reservation = [{
-  id: "1",
-  name: "Hoang",
-  phone: 988,
-  email: "1@1.com"
-}];
+    id: "1",
+    name: "Hoang",
+    phone: 988,
+    email: "1@1.com"
+  },
+  {
+    id: "2",
+    name: "Hoan222g",
+    phone: 22988,
+    email: "1@1.222com"
+  }
+];
 
 // Routes
 // =============================================================
@@ -34,7 +41,7 @@ app.get("/add", function (req, res) {
 });
 
 app.get("/view", function (req, res) {
-  res.sendFile(path.join(__dirname, "reserve.html"));
+  res.sendFile(path.join(__dirname, "reserved.html"));
 });
 
 
