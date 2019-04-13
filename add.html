@@ -20,7 +20,8 @@
             <hr>
             <h3>Make your reservation.</h3>
             <hr>
-            <a href="/view"><button class="btn btn-danger btn-lg"><span class="fa fa-eye"></span> View Table</button></a>
+            <a href="/view"><button class="btn btn-danger btn-lg"><span class="fa fa-eye"></span> View
+                    Table</button></a>
         </div>
         <div class="row">
 
@@ -50,9 +51,10 @@
 
                             <div class="form-group">
                                 <label for="uniqueId">uniqueId</label>
-                                <input type="text" class="form-control" id="uniqueId">
+                                <input type="text" class="form-control" id="uniqueId" disabled>
                             </div>
-
+                            <span id="addSuccess" class="alert"></span>
+                            <span id="addFailed" class="alert"></span>
                         </form>
                         <br>
                         <div class="text-right">
@@ -80,8 +82,12 @@
             // Question: What does this code do??
             $.post("/api/reservation", newReservation)
                 .then(function (data) {
-                    console.log("add.html", data);
-                    alert("Adding character...");
+                    if (data) {
+                        $('#addSuccess').addClass('alert-success').text('Add Successfully');
+                    } else {
+                        $('#addFailed').addClass('alert-failed').text('Add Failed');
+                    }
+
                 });
         });
     </script>

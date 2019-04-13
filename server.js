@@ -28,6 +28,9 @@ var reservation = [{
   }
 ];
 
+var waitingList = [];
+
+
 // Routes
 // =============================================================
 
@@ -46,22 +49,11 @@ app.get("/view", function (req, res) {
 
 
 app.get("/api/reservation", function (req, res) {
-  return res.json(reservation);
-});
+  return res.json({
+    reservation,
+    waitingList,
+  });
 
-// Displays a single reservation, or returns false
-app.get("/api/reservation/:reservation", function (req, res) {
-  var chosen = req.params.reservation;
-
-  console.log(chosen);
-
-  for (var i = 0; i < reservation.length; i++) {
-    if (chosen === reservation[i].name) {
-      return res.json(reservation[i]);
-    }
-  }
-
-  return res.json(false);
 });
 
 // Create New Characters - takes in JSON input
@@ -71,8 +63,7 @@ app.post("/api/reservation", function (req, res) {
   newreservation.routeName = newreservation.name.replace(/\s+/g, "").toLowerCase();
 
   console.log(newreservation);
-
-  reservation.push(newreservation);
+  (reservation.length <= 5) ? reservation.push(newreservation): waitingList.push(newreservation);
 
   res.json(reservation);
 });
