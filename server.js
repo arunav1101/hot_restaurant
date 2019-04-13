@@ -30,6 +30,10 @@ app.get("/", function (req, res) {
 });
 
 app.get("/add", function (req, res) {
+  res.sendFile(path.join(__dirname, "resevered.html"));
+});
+
+app.get("/view", function (req, res) {
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
@@ -68,6 +72,6 @@ app.post("/api/reservation", function (req, res) {
 
 // Starts the server to begin listening
 // =============================================================
-app.listen(port, function () {
-  console.log("App listening on PORT " + port);
+app.listen(PORT, function () {
+  console.log("App listening on PORT " + PORT);
 });
