@@ -20,12 +20,14 @@
             <hr>
             <h2 class="text-center">Make Your Reservation</h2>
             <br>
-            <a href="/add" type="button" class="btn btn-danger">Make Reservation</a>
-            <a href="/" type="button" class="btn btn-primary">Home</a>
+            <h2 class="text-center">
+                <a href="/add" type="button" class="btn btn-danger btn-lg">View Tables</a>
+                <a href="/" type="button" class="btn btn-primary btn-lg">Home</a>
+            </h2>
         </div>
 
         <div class="container">
-            <h4>Reseved</h4>
+            <h4>Reserved</h4>
             <table class="table table-light">
                 <thead>
                     <tr>
@@ -62,7 +64,6 @@
     let xhttp = new XMLHttpRequest();
     xhttp.open('get', '/api/reservation', true);
     xhttp.send();
-
     xhttp.onreadystatechange = function () {
         console.log(this);
         if (this.readyState === 4 && this.status === 200) {
