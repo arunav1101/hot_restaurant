@@ -58,7 +58,7 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 <script>
     let tbody = $('#tbody');
-
+    let wTbody = $('#waiting-tbody');
     let xhttp = new XMLHttpRequest();
     xhttp.open('get', '/api/reservation', true);
     xhttp.send();
@@ -67,15 +67,29 @@
         console.log(this);
         if (this.readyState === 4 && this.status === 200) {
             const response = JSON.parse(this.response);
+            console.log(response.length);
+
             response.forEach(table => {
-                tbody.append(`
-        <tr>
-            <th scope="col">${table.id}</th>
-            <th scope="col">${table.name}</th>
-            <th scope="col">${table.email}</th>
-            <th scope="col">${table.phone}</th>
-        </tr>
-        `);
+
+                if (response.indexOf(table) < 5) {
+                    tbody.append(`
+                        <tr>
+                            <th scope="col">${table.id}</th>
+                            <th scope="col">${table.name}</th>
+                            <th scope="col">${table.email}</th>
+                            <th scope="col">${table.phone}</th>
+                        </tr>
+                        `);
+                } else {
+                    wTbody.append(`
+                    <tr>
+                        <th scope="col">${table.id}</th>
+                        <th scope="col">${table.name}</th>
+                        <th scope="col">${table.email}</th>
+                        <th scope="col">${table.phone}</th>
+                    </tr>
+                    `);
+                }
             });
         }
     }
