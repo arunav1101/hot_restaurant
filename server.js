@@ -41,7 +41,7 @@ app.get("/add", function (req, res) {
 });
 
 app.get("/view", function (req, res) {
-  res.sendFile(path.join(__dirname, "reserved.html"));
+  res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
 
