@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Reserve</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reseved</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -20,10 +23,64 @@
             <hr>
             <h2 class="text-center">Make Your Reservation</h2>
             <br>
-            <button type="button" class="btn btn-danger">Make Reservation</button>
-            <button type="button" class="btn btn-light">Home</button>
+            <a href="/add" type="button" class="btn btn-danger">Make Reservation</a>
+            <a href="/" type="button" class="btn btn-light">Home</a>
+        </div>
+
+        <div class="container">
+            <h4>Reseved</h4>
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">Table</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+            <h4>Waiting List</h4>
+            <table class="table table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">Table</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                    </tr>
+                </thead>
+                <tbody id="waiting-tbody">
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script>
+    let tbody = $('#tbody');
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.open('get', '/api/reservation', true);
+    xhttp.send();
+
+    xhttp.onreadystatechange = function () {
+        console.log(this);
+        if (this.readyState === 4 && this.status === 200) {
+            const response = JSON.parse(this.response);
+            response.forEach(table => {
+                tbody.append(`
+        <tr>
+            <th scope="col">${table.id}</th>
+            <th scope="col">${table.name}</th>
+            <th scope="col">${table.email}</th>
+            <th scope="col">${table.phone}</th>
+        </tr>
+        `);
+            });
+        }
+    }
+</script>
 
 </html>
