@@ -63,7 +63,7 @@ app.post("/api/reservation", function (req, res) {
   newreservation.routeName = newreservation.name.replace(/\s+/g, "").toLowerCase();
 
   console.log(newreservation);
-  (reservation.length <= 5) ? reservation.push(newreservation): waitingList.push(newreservation);
+  (reservation.length < 5) ? reservation.push(newreservation): waitingList.push(newreservation);
 
   res.json(reservation);
 });
